@@ -13,11 +13,18 @@ Gem::Specification.new do |s|
   s.rubyforge_project = 'surveygizmo'
   
   # Development Gems
-  # s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'webmock'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'rb-inotify'
+
   # Gems
   s.add_dependency 'hashie', '~> 1.2.0'
   s.add_dependency 'faraday', '~> 0.8'
   s.add_dependency 'faraday_middleware', '~> 0.8'
+
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

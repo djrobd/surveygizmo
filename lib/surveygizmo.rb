@@ -1,10 +1,11 @@
-require 'surveygizmo/api'
+require 'surveygizmo/version'
 require 'surveygizmo/client'
-require 'surveygizmo/configuration'
+require 'surveygizmo/configurable'
 
 module Surveygizmo
-  extend Configuration
   class << self
+    include Surveygizmo::Configurable
+
     # Alias for Surveygizmo::Client.new
     #
     # @return [Surveygizmo::Client]
@@ -21,6 +22,8 @@ module Surveygizmo
     def respond_to?(method, include_private = false)
       new.respond_to?(method, include_private) || super(method, include_private)
     end
-    
+
   end
 end
+
+Surveygizmo.setup

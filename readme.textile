@@ -2,6 +2,8 @@ h1. The SurveyGizmo Ruby Gem
 
 A Ruby wrapper for the "SurveyGizmo REST API":http://developer.surveygizmo.com/resources/rest-api-documentation-version-1-01/
 
+!https://secure.travis-ci.org/ample/surveygizmo.png(Build Status)!:http://travis-ci.org/ample/surveygizmo
+
 h2. Installation
 
 @gem install surveygizmo@
@@ -21,6 +23,25 @@ bc. # Return a specific Survey
 Surveygizmo.survey(id)
 
 See the "Documentation":http://rdoc.info/github/ample/surveygizmo for the full list
+
+h2. Filtering
+
+You can filter any request by passing a hash to the filter option.
+
+bc. # Only show survey responses that have been made after 1 January 2012
+Surveygizmo.survey_responses(survey_id, filter: { field: "datesubmitted", operator: ">=", value: "2012-01-01"})
+
+You can add multiple filters by passing an array of hashes.
+
+bc. # Show responses made in January 2012
+Surveygizmo.survey_responses(survey_id, filter: [{ field: "datesubmitted", operator: ">=", value: "2012-01-01"}, {field "datesubmitted", operator: "<=", value: "2012-01-31"])
+
+h2. Accessing meta data of the requests
+
+You can access the <code>result_ok?</code>, <code>total_count</code>, <code>page</code>, <code>total_pages</code> and <code>results_per_page</code> metadata. 
+
+bc. # Count the survey responses, but don't fetch them.
+Surveygizmo.survey_questions(survey_id, resultsperpage: 0).total_count 
 
 h2. To Do List
 
@@ -59,12 +80,10 @@ This gem is very young, and not all endpoints have been implemented. Here's a br
 ** _Update_
 ** _Delete_
 * _Survey Option_
-* _Survey Question_
+* Survey Question
 * _Survey Page_
-* _Survey Statistics_
+* Survey Statistics
 * _Email Message_
-
-Also, there aren't any tests yet. This is high on the priority list and should be coming soon.
 
 h2. Thanks
 
@@ -72,4 +91,4 @@ This gem is heavily inspired by the Twitter gem and John Nunemaker's hard work.
 
 h2. Copyright
 
-Copyright (c) 2011 Bobby Uhlenbrock. See LICENSE for details.
+Copyright (c) 2011-2012 Bobby Uhlenbrock. See LICENSE for details.
